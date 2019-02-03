@@ -29,3 +29,8 @@ steps:
 
 - script: yarn build
   displayName: 'Build project for standard node application'
+
+- task: PublishPipelineArtifact@0
+  inputs:
+    artifactName: 'dist'
+    targetPath: 'build'
