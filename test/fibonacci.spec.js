@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import fibonacci from '../src/component/fibonacci.js'
-import { describe, it, assert } from 'mocha'
+import { describe, it } from 'mocha'
 
 describe('test fibonacci function', () => {
   describe('fibonacci(0)', () => {
