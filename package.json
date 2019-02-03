@@ -1,17 +1,19 @@
 {
-  "name": "es6-libs",
+  "name": "@meshenka/es6-libs",
   "version": "1.1.0",
   "description": "a utility lib of js functions",
-  "main": "src/app.js",
   "author": "Sylvain Gogel <sylvain.gogel@gmail.com>",
   "license": "MIT",
+  "repository": "https://github.com/meshenka/es6-libs/tree/master",
   "scripts": {
     "start": "babel-node src/app.js",
     "lint": "eslint src",
     "fix:lint": "eslint src --fix",
     "test": "mocha --require @babel/register ./test/**/*.spec.js",
-    "prebuild": "rm -rf build",
-    "build": "babel src --out-dir ./build --source-maps",
+    "prebuild": "rm -rf build && mkdir build",
+    "build:docs": "cp LICENSE CHANGELOG.md README.md ./build",
+    "build:babel": "NODE_ENV=production babel src --out-dir ./build --source-maps",
+    "build": "yarn build:docs && yarn build:babel",
     "release": "standard-version"
   },
   "devDependencies": {
