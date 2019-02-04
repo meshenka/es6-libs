@@ -1,5 +1,7 @@
-import fibonacci from './component/fibonacci.js'
-import reverse, {snakize} from './component/sentence.js'
+import fibonacci from './component/fibonacci'
+import reverse, {snakize} from './component/sentence'
+import {frequency,frequencyFromData} from './component/pi'
+import {flip} from './component/array'
 
 const a = fibonacci(20)
 
@@ -10,3 +12,9 @@ const sentence = "Ça te dit de rentrer chez moi et de faire des choses que je r
 snakize(sentence).then(console.log)
 reverse(sentence).then(console.log)
 reverse(sentence).then(snakize).then(console.log)
+
+// const piFromData = frequencyFromData()
+// piFromData.then(console.log)
+frequency().then(console.log)
+
+console.log(flip(['1','2','3','4','5'],3))
