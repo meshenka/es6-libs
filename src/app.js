@@ -16,6 +16,6 @@ reverse(sentence).then(snakize).then(console.log)
 
 const piFromData = frequencyFromData()
 piFromData.then(console.log)
-frequency().then(console.log)
+console.log(frequency())
 
 console.log(flipFirstKElements(['1','2','3','4','5'],3))
