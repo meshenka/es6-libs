@@ -1,7 +1,8 @@
+/*eslint no-console: 0 */
 import fibonacci from './component/fibonacci'
 import reverse, {snakize} from './component/sentence'
 import {frequency,frequencyFromData} from './component/pi'
-import {flip} from './component/array'
+import {flipFirstKElements} from './component/array'
 
 const a = fibonacci(20)
 
@@ -13,8 +14,8 @@ snakize(sentence).then(console.log)
 reverse(sentence).then(console.log)
 reverse(sentence).then(snakize).then(console.log)
 
-// const piFromData = frequencyFromData()
-// piFromData.then(console.log)
+const piFromData = frequencyFromData()
+piFromData.then(console.log)
 frequency().then(console.log)
 
-console.log(flip(['1','2','3','4','5'],3))
+console.log(flipFirstKElements(['1','2','3','4','5'],3))

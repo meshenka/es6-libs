@@ -13,11 +13,13 @@ describe('test pi component', () => {
   })
 
   describe('frequency() vs frequencyFromData()', () => {
-    it('should be an equals', async () => {
-      //@todo some async pb here during tests
-      // Error [ERR_STREAM_WRITE_AFTER_END]: write after end
-      let [cache, data] = await Promise.all([frequency(), frequencyFromData()])
-      expect(cache).to.equal(data)
+    it('should be an equals', () => {
+      //for some reasons Promise.all crash here :(clea
+      const cache = frequency()
+      frequencyFromData()
+        .then(data => {
+          expect(cache).to.deep.equal(data)
+        })
     }).timeout(5000)
   })
 })

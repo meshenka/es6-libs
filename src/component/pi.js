@@ -9,48 +9,33 @@
  
  */
 import fs from 'fs'
-import { Transform, pipeline } from 'stream'
-import { promisify } from 'util'
+import { Transform } from 'stream'
+import { inherits } from 'util'
 
 /**
  * a Stream transofrm to remove new lines
  */
-const removeNewLineTransform = new Transform({
-  transform(chunk, encoding, callback) {
-    const cleanedString = chunk.toString().replace(/\n/g, '')
-    this.push(cleanedString)
-    callback()
-  }
-})
+
+function RemoveNewLineTransform(options) {
+  Transform.call(this, options)
+}
+
+inherits(RemoveNewLineTransform, Transform)
+
+RemoveNewLineTransform.prototype._transform = function(
+  chunk,
+  encoding,
+  callback
+) {
+  const cleanedString = chunk.toString().replace(/\n/g, '')
+  this.push(cleanedString)
+  callback()
+}
+
 /**
  * reduce as a Stream Transform
- *
  * @see https://www.ramielcreations.com/the-hidden-power-of-node-js-streams/
- *
- * @param {} fn
- * @param {*} acc
- * @param {*} options
  */
-const reduce = (fn, acc, options = {}) =>
-  new Transform({
-    objectMode: true,
-    ...options,
-
-    transform(chunk, encoding, callback) {
-      try {
-        acc = fn(acc, chunk)
-      } catch (e) {
-        return callback(e)
-      }
-      return callback()
-    },
-
-    flush(callback) {
-      callback(null, acc)
-    }
-  })
-
-// const asyncPipeline = promisify(pipeline)
 
 /**
  * Compute 1M digits of Pi frequency
@@ -65,8 +50,9 @@ const frequencyFromData = () => {
 
     const piStream = fs
       .createReadStream(file, { encoding: 'utf8' })
-      .pipe(removeNewLineTransform)
+      .pipe(new RemoveNewLineTransform)
 
+    piStream
       .on('data', chunk => {
         const chunkAsArray = chunk.toString().split('')
         stats = chunkAsArray.reduce((acc, value) => {
@@ -77,11 +63,9 @@ const frequencyFromData = () => {
           return acc
         }, stats)
       })
-
-      .on('finish', () => {
+      .on('end', () => {
         resolve(stats) //resolve promise with
       })
-
       .on('error', reject)
   })
 }
@@ -89,7 +73,7 @@ const frequencyFromData = () => {
 /**
  * cached version to avoid reading the big file
  */
-const frequency = async () => {
+const frequency = () => {
   return {
     '0': 99960,
     '1': 99759,
