@@ -9,29 +9,12 @@
  
  */
 import fs from 'fs'
-import { Transform } from 'stream'
-import { inherits } from 'util'
+import RemoveNewLineTransform from './transform/remove-newline'
 
-/**
- * a Stream transofrm to remove new lines
- */
 
-function RemoveNewLineTransform(options) {
-  Transform.call(this, options)
+const frequencyFromData = () => {
+  return frequencyFromFile('./data/pi1000000.txt')
 }
-
-inherits(RemoveNewLineTransform, Transform)
-
-RemoveNewLineTransform.prototype._transform = function(
-  chunk,
-  encoding,
-  callback
-) {
-  const cleanedString = chunk.toString().replace(/\n/g, '')
-  this.push(cleanedString)
-  callback()
-}
-
 /**
  * reduce as a Stream Transform
  * @see https://www.ramielcreations.com/the-hidden-power-of-node-js-streams/
@@ -41,10 +24,9 @@ RemoveNewLineTransform.prototype._transform = function(
  * Compute 1M digits of Pi frequency
  * @see https://github.com/substack/stream-handbook
  */
-const frequencyFromData = () => {
+const frequencyFromFile = (file) => {
   return new Promise((resolve, reject) => {
-    const file = './data/pi1000000.txt'
-
+   
     /** @var Object <key>: <value> key is the digit, value is nbr of time present in the file */
     let stats = {}
 
@@ -88,4 +70,4 @@ const frequency = () => {
   }
 }
 
-export { frequency, frequencyFromData }
+export { frequency, frequencyFromData, frequencyFromFile }
