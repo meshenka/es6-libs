@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/meshenka/es6-libs/tree/master/compare/v1.2.0...v1.3.0) (2019-02-10)
+
+
+### Bug Fixes
+
+* pi/frequency no more async ([c1e7820](https://github.com/meshenka/es6-libs/tree/master/commit/c1e7820))
+
+
+### Features
+
+* add firstRecurringCharacter to statistics module ([d0c287a](https://github.com/meshenka/es6-libs/tree/master/commit/d0c287a))
+* add order of statistics ([903a9eb](https://github.com/meshenka/es6-libs/tree/master/commit/903a9eb))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/meshenka/es6-libs/tree/master/compare/v1.1.0...v1.2.0) (2019-02-05)
 
